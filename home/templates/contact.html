@@ -38,19 +38,22 @@
             <div class="address-row">
                 <div class="col-md-6 address-left wow fadeInLeft animated" data-wow-delay=".5s">
                     <div class="address-grid" style="height: 900px">
-                         <p style="margin-top: 85px"></p>
+                        <p style="margin-top: 85px"></p>
                         <h4 class="wow fadeIndown animated" data-wow-delay=".5s">Bize Ulasın </h4>
 
-                        <form >
 
-                            <input class="wow fadeIndown animated" data-wow-delay=".6s" type="text" placeholder="Name"
-                                   required="">
-                            <input class="wow fadeIndown animated" data-wow-delay=".7s" type="text" placeholder="Email"
-                                   required="">
-                            <input class="wow fadeIndown animated" data-wow-delay=".8s" type="text"
-                                   placeholder="Subject" required="">
-                            <textarea class="wow fadeIndown animated" data-wow-delay=".8s" placeholder="Message"
-                                      required=""></textarea>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert- {{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+
                             <input class="wow fadeIndown animated" data-wow-delay=".9s" type="submit" value="SEND">
                         </form>
 
@@ -70,7 +73,7 @@
                         <h4>MAIL</h4>
                         <p><a href="mailto:example@mail.com"> {{ setting.email | safe }}</a></p>
                     </div>
-                    <div class="address-info address-mdl wow fadeInRight animated" data-wow-delay=".7s" >
+                    <div class="address-info address-mdl wow fadeInRight animated" data-wow-delay=".7s">
 
                         <p>{{ setting.contact | safe }}</p>
                     </div>
