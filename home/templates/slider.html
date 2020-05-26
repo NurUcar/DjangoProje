@@ -8,66 +8,21 @@
             <section class="slider grid">
                 <div class="flexslider trend-slider">
                     <ul class="slides">
-                        <li>
-                            <div class="col-md-5 trend-left">
-                                <img src="{% static 'images/t1.png' %}" alt=""/>
-                            </div>
-                            <div class="col-md-7 trend-right">
-                                <h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-                                <h5>Flat 20% OFF</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac
-                                    volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor.
-                                    Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora
-                                    torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed
-                                    viverra dapibus tincidunt.</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="col-md-5 trend-left">
-                                <img src="{% static 'images/t2.png' %}" alt=""/>
-                            </div>
-                            <div class="col-md-7 trend-right">
-                                <h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-                                <h5>Flat 20% OFF</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac
-                                    volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor.
-                                    Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora
-                                    torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed
-                                    viverra dapibus tincidunt.</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="col-md-5 trend-left">
-                                <img src="{% static 'images/t3.png' %}" alt=""/>
-                            </div>
-                            <div class="col-md-7 trend-right">
-                                <h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-                                <h5>Flat 20% OFF</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac
-                                    volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor.
-                                    Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora
-                                    torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed
-                                    viverra dapibus tincidunt.</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="col-md-5 trend-left">
-                                <img src="{% static 'images/t4.png' %}" alt=""/>
-                            </div>
-                            <div class="col-md-7 trend-right">
-                                <h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-                                <h5>Flat 20% OFF</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac
-                                    volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor.
-                                    Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora
-                                    torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed
-                                    viverra dapibus tincidunt.</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
+                        {% for rs in sliderdata %}
+                            <li>
+                                <div class="col-md-5 trend-left" href="/product/{{ rs.id }}">
+                                    <img src="{{ rs.image.url }}"  alt=""/>
+                                </div>
+                                <div class="col-md-7 trend-right">
+                                    <h4>SENIN ICIN <span>SECTIKLERIMIZ</span></h4>
+                                    <h5>{{ rs.title }}</h5>
+                                    <h5>{{ rs.writer }}</h5>
+                                    <h5>{{ rs.price }}TL</h5>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        {% endfor %}
+
                     </ul>
                 </div>
             </section>
