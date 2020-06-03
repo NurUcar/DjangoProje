@@ -1,1 +1,1 @@
-"# Django Online Kitap Satis Sitesi  Proje"  
+"# Django Online Kitap Satis Sitesi  Projesi"  
