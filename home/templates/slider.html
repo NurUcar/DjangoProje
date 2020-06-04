@@ -10,7 +10,7 @@
                     <ul class="slides">
                         {% for rs in sliderdata %}
                             <li>
-                                <div class="col-md-5 trend-left" href="/product/{{ rs.id }}">
+                                <div class="col-md-5 trend-left" href="/product/{{ rs.id }}/{{ rs.slug }}">
                                     <img src="{{ rs.image.url }}"  alt=""/>
                                 </div>
                                 <div class="col-md-7 trend-right">
