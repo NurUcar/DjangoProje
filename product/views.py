@@ -27,6 +27,6 @@ def addcomment(request, id):
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
             messages.success(request, "Yorumunuz başarı ile gönderilmiştir. Teşekkür Ederiz..")
-            return HttpResponseRedirect(url)
+            return HttpResponseRedirect('/')
         messages.warning("Yorumunuz Gönderilemedi. Lütfen kontrol ediniz..")
     return HttpResponseRedirect(url)
