@@ -49,22 +49,14 @@
                 <div class="col-md-6 single-top-left simpleCart_shelfItem wow fadeInRight animated"
                      data-wow-delay=".5s">
                     <h3>{{ product.title }}</h3>
-                    <div class="single-rating">
-						<span class="starRating">
-							<input id="rating5" type="radio" name="rating" value="5" checked>
-							<label for="rating5">5</label>
-							<input id="rating4" type="radio" name="rating" value="4">
-							<label for="rating4">4</label>
-							<input id="rating3" type="radio" name="rating" value="3">
-							<label for="rating3">3</label>
-							<input id="rating2" type="radio" name="rating" value="2">
-							<label for="rating2">2</label>
-							<input id="rating1" type="radio" name="rating" value="1">
-							<label for="rating1">1</label>
-						</span>
-                        <p>5.00 out of 5</p>
-                        <a href="#">Add Your Review</a>
+
+                    <div style="margin-top: 20px; margin-bottom: 20px;">
+                        <a href="/product/{{ product.id }}/{{ product.slug }}/product_comment"><b>Add Your
+                            Comment</b></a>
+
                     </div>
+
+
                     <h6 class="item_price">{{ product.price }}₺</h6>
                     <p>{{ product.writer }}</p>
                     <p>{{ product.publisher }}</p>
@@ -74,77 +66,68 @@
                     <div class="btn_form">
                         <a href="#" class="add-cart item_add">ADD TO CART</a>
                     </div>
+
                 </div>
                 <div class="clearfix"></div>
             </div>
             <!--collapse-tabs-->
-            <div class="collpse tabs">
-                <div class="panel-group collpse" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default wow fadeInUp animated" data-wow-delay=".5s">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                   aria-expanded="true" aria-controls="collapseOne">
-                                    Description
-                                </a>
-                            </h4>
+
+            <div class="grid_3 grid_5 wow fadeInDown animated" data-wow-delay=".5s">
+                <h3 class="hdg">Tabs</h3>
+                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab"
+                                                                  data-toggle="tab"
+                                                                  aria-controls="home"
+                                                                  aria-expanded="true">Description</a></li>
+                        <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab"
+                                                   aria-controls="profile">Comments</a></li>
+
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="description"
+                             aria-labelledby="home-tab">
+                            <p>{{ product.detail|safe }}</p>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
-                             aria-labelledby="headingOne">
-                            <div class="panel-body">
-                                {{ product.detail|safe }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default wow fadeInUp animated" data-wow-delay=".7s">
-                        <div class="panel-heading" role="tab" id="headingThree">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    reviews (5)
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingThree">
-                            <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
-                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it
-                                squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-                                craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-                                butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
-                                nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default wow fadeInUp animated" data-wow-delay=".8s">
-                        <div class="panel-heading" role="tab" id="headingFour">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    help
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingFour">
-                            <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
-                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it
-                                squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-                                craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-                                butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
-                                nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
+
+                        <div role="tabpanel" class="tab-pane fade " id="profile" aria-labelledby="profile-tab">
+                            {% for rs in comments %}
+                                <div class="single-rating">
+                                    <p>{{ rs.user.first_name }} - {{ rs.created_at }}</p>
+                                    <span class="starRating">
+                                        <input id="rating5" type="radio" name="rating" value="5" {% if rs.rate < 5 %}
+                                               checked {% endif %}>
+                                        <label for="rating5">5</label>
+                                        <input id="rating4" type="radio" name="rating" value="4" {% if rs.rate < 4 %}
+                                               checked {% endif %}>
+                                        <label for="rating4">4</label>
+                                        <input id="rating3" type="radio" name="rating" value="3" {% if rs.rate < 3 %}
+                                               checked {% endif %}>
+                                        <label for="rating3">3</label>
+                                        <input id="rating2" type="radio" name="rating" value="2" {% if rs.rate < 2 %}
+                                               checked {% endif %}>
+                                        <label for="rating2">2</label>
+                                        <input id="rating1" type="radio" name="rating" value="1"{% if rs.rate < 1 %}
+                                               checked {% endif %}>
+                                        <label for="rating1">1</label>
+                                     </span>
+
+                                </div>
+                                <b> {{ rs.subject }}</b>
+                                <p> {{ rs.comment }}</p>
+                            {% endfor %}
                         </div>
                     </div>
+
                 </div>
             </div>
-            <!--//collapse -->
         </div>
     </div>
+
     <!--//single-page-->
+
+
+
+
 
 {% endblock %}
