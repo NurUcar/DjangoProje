@@ -1,0 +1,93 @@
+{% extends "homebase.html" %}
+
+{% block title %}{{ setting.company }} Kullanıcı Mesajı{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a></li>
+                <li><a href="#"><span class="glyphicon " aria-hidden="true"></span>Products</a></li>
+                <li><a href="/category/{{ product.category_id }}/{{ product.category.slug }}"><span class="glyphicon "
+                                                                                                    aria-hidden="true"></span>{{ product.category }}
+                </a></li>
+                <li><a href="/product/{{ product.id }}/{{ product.slug }}"><span class="glyphicon "
+                                                                                 aria-hidden="true"></span>{{ product.title }}
+                </a></li>
+                <li class="active">Product Review</li>
+            </ol>
+        </div>
+    </div>
+    <!--//breadcrumbs-->
+    <!--product_review-->
+    <div class="address"><!--address-->
+        <div class="container">
+            <div class="address-row">
+                <div class="col-md-6 address-left wow fadeInLeft animated" style="margin-left:300px;"
+                     data-wow-delay=".5s">
+
+                    <div class="address-grid">
+                        <h4 class="wow fadeIndown animated" data-wow-delay=".5s">Sen de bu ürün hakkındaki fikirlerini
+                            paylas!</h4>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-warning-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+
+                            {% endfor %}
+                        {% endif %}
+                        <form action="/product/addcomment/{{ product.id }}" method="post">
+                            {% csrf_token %}
+
+                            <input class="wow fadeIndown animated" data-wow-delay=".7s" type="text" name="subject"
+                                   id="id_subject"
+                                   placeholder="Mesaj Konusu"
+                                   required="">
+                            <textarea class="wow fadeIndown animated" data-wow-delay=".8s" name="comment"
+                                      id="id_comment"
+                                      placeholder="Kullanıcı Mesajı"
+                                      required=""></textarea>
+                            <div class="single-rating">
+                                <b style="color: #f0f0f0; margin-left: 5px">Yıldız veriniz:</b>
+                                <span class="starRating">
+
+                                    <input id="rating5" type="radio" name="rate" value="5" >
+                                    <label for="rating5">5</label>
+                                    <input id="rating4" type="radio" name="rate" value="4">
+                                    <label for="rating4">4</label>
+                                    <input id="rating3" type="radio" name="rate" value="3">
+                                    <label for="rating3">3</label>
+                                    <input id="rating2" type="radio" name="rate" value="2">
+                                    <label for="rating2">2</label>
+                                    <input id="rating1" type="radio" name="rate" value="1">
+                                    <label for="rating1">1</label>
+                                </span>
+                            </div>
+
+                            {% if user.id is not None %}
+                                <input class="wow fadeIndown animated" data-wow-delay=".9s" type="submit" value="SEND">
+                            {% else %}
+                                Yorum eklemek için <a href="/login">login</a>  olunuz!
+                            {% endif %}
+
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--//contact-->
+
+{% endblock %}
