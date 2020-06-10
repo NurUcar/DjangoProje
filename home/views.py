@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactFormMessage
 from product.models import Product, Category, Images, Comment
 
@@ -106,3 +107,18 @@ def product_comment(request, id, slug):
                'images': images,
                }
     return render(request, 'product_comment.html', context)
+
+
+def product_search(request):
+    if request.method == 'POST':  # form post edildiyse
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            product = Product.objects.filter(title__icontains=query)
+            context = {
+                'products': product,
+                'category': category,
+            }
+            return render(request, 'product_search.html', context)
+        return HttpResponseRedirect('/')

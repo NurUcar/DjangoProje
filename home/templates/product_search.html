@@ -1,0 +1,61 @@
+{% extends "homebase.html" %}
+
+{% block title %}İletişim {{ setting.company }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
+{% endblock %}
+{% load static %}
+
+
+{% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a>
+                </li>
+                <li class="active">Arama Sonuçları</li>
+            </ol>
+        </div>
+    </div>
+    <!--//breadcrumbs-->
+
+    <div class="new">
+        <div class="container">
+            <div class="row">
+                <table cellpadding="3" width="1200">
+                    <tr>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for rs in products %}
+                        <tr>
+                            <td>
+                                <a href="/product/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}"
+                                                                                  style="margin-top: 10px; margin-bottom: 10px; border: 5px solid rgba(255,154,21,0.84);"
+                                                                                  alt=""></a>
+                            </td>
+
+                            <td>
+                                <h4><a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></h4>
+                            </td>
+
+                            <td>
+                                <a href="/category/{{ rs.category.id }}/{{ rs.category.slug }}"> {{ rs.category }}</a>
+                            </td>
+
+                            <td>
+                                <h4>{{ rs.price }}₺</h4>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

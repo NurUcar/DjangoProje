@@ -119,8 +119,9 @@
                 <!--//navbar-header-->
             </nav>
             <div id="cd-search" class="cd-search">
-                <form>
-                    <input type="search" placeholder="Search...">
+                <form action="/search/" method="post">
+                    {% csrf_token %}
+                    <input name="query" type="text" placeholder="Search...">
                 </form>
             </div>
         </div>
