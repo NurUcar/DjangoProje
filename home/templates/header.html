@@ -3,7 +3,12 @@
     <div class="top-header navbar navbar-default"><!--header-one-->
         <div class="container">
             <div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-                <p>Welcome to Modern Shoppe <a href="register.html">Register </a> Or <a href="signin.html">Sign In </a>
+                <p>Hoşgeldiniz!
+                    {% if user.id is not None %}
+                      <b> {{ user.first_name }}</b>   <a href="/logout/">Çıkış Yap </a>
+                    {% else %}
+                        <a href="/join/">Üye Ol </a> yada <a href="/login/">Giriş Yap </a>
+                    {% endif %}
                 </p>
             </div>
             <div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated" data-wow-delay=".5s">
@@ -23,18 +28,19 @@
         <div class="container">
             <div class="nav navbar-nav header-two-left">
                 <ul>
-                    <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 892</li>
+                    <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>{{ setting.phone }}</li>
                     <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
-                            href="mailto:info@example.com">mail@example.com</a></li>
+                            href="mailto:info@example.com">{{ setting.email }}</a></li>
                 </ul>
             </div>
             <div class="nav navbar-nav logo wow zoomIn animated" data-wow-delay=".7s">
-                <h1><a href="index.html">Modern <b>Shoppe</b><span class="tag">Everything for Kids world </span> </a>
+                <h1><a href="/">Deniz <b>Kitap</b><span class="tag">Aradığınız Kitaba En Hızlı Ulaşabileceğiniz Websitesi </span>
+                </a>
                 </h1>
             </div>
             <div class="nav navbar-nav navbar-right header-two-right">
                 <div class="header-right my-account">
-                    <a href="contact.html"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                    <a href="/contact"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                         CONTACT US</a>
                 </div>
                 <div class="header-right cart">

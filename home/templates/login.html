@@ -1,0 +1,66 @@
+{% extends "homebase.html" %}
+
+{% block title %}Login {{ setting.company }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
+{% endblock %}
+
+
+
+{% block content %}
+    <!--breadcrumbs-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow fadeInUp" data-wow-delay=".5s">
+                <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a>
+                </li>
+                <li class="active">Giriş Yap</li>
+            </ol>
+        </div>
+    </div>
+    <!--//breadcrumbs-->
+    <!--login-->
+    <div class="login-page">
+        <div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
+            <h3 class="title">Üye<span> Girisi</span></h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
+        </div>
+        <div class="widget-shadow">
+            <div class="login-top wow fadeInUp animated" style="font-size: large" data-wow-delay=".7s">
+                <h4>Deniz Kitaba Hosgeldiniz ! <br> Üye Degilmisiniz? <a href="/join/"> Simdi Üye Ol»</a></h4>
+            </div>
+
+            <div class="login-body wow fadeInUp animated" data-wow-delay=".7s">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert- {{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="text" class="user" name="username" placeholder="Kullanıcı Adınız.." required="">
+                    <input type="password" name="password" class="lock" placeholder="Şifreniz..">
+                    <input type="submit" name="Sign In" value="Login">
+                    <div class="forgot-grid">
+                        <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Beni Hatırla</label>
+                        <div class="forgot">
+                            <a href="#">Şifremi Unuttum?</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="login-page-bottom">
+            <h5> - YADA -</h5>
+            <div class="social-btn"><a href="#"><i>Facebook ile Giriş Yap</i></a></div>
+            <div class="social-btn sb-two"><a href="#"><i>Twitter ile Giriş Yap</i></a></div>
+        </div>
+    </div>
+    <!--//login-->
+{% endblock %}
