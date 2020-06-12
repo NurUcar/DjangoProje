@@ -1,0 +1,89 @@
+/**
+ * Skyrim-inspired Menu
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
+html {
+	min-height: 100%;
+	font-family: "Open Sans", sans-serif;
+	font-weight: 300;
+	color: #FFF;
+}
+
+body, html {
+	height: 50%;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: rgba(255, 255, 255, 0.6);
+	text-decoration: none;
+}
+
+	a:hover, li:hover > a {
+		color: #FFF;
+	}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	margin: 0;
+	padding: 0;
+}
+
+#menu {
+	float: left;
+	font-size: 1.5em;
+	min-height: 100%;
+	margin-left: 1em;
+}
+
+#menu li {
+	position: relative;
+	z-index: 1;
+}
+
+#menu li a {
+	display: block;
+	padding: 0.5em 1em;
+	white-space: nowrap;
+}
+
+	#menu li ul {
+		position: absolute;
+		overflow: hidden;
+		display: none;
+		left: 100%;
+		top: 0.5em;
+		float: none;
+	}
+	
+	#menu li:hover ul {
+		display: block;
+	}
+	
+	#menu li ul a {
+		position: relative;
+		font-size: 0.8em;
+  
+	}
+	
+	#menu li ul a:hover:before {
+		content: "";
+		display: block;
+		width: 1em;
+		height: 1em;
+		border: 1px solid #FFF;
+		position: absolute;
+		top: 0.5em;
+		left: -0.75em;
+		-moz-transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}

@@ -2,14 +2,22 @@
 <div class="header">
     <div class="top-header navbar navbar-default"><!--header-one-->
         <div class="container">
-            <div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-                <p>Hoşgeldiniz!
+            <div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s"
+                 style="margin-top: 3px; margin-bottom: 3px;">
+                <ul>
                     {% if user.id is not None %}
-                      <b> {{ user.first_name }}</b>   <a href="/logout/">Çıkış Yap </a>
+                        <img style="height: 50px;width: 50px;border: 0.5px solid gray;"
+                             src="{{ request.user.profile.image.url }}">
+                        <b style="margin-left: 5px;"> {{ user.first_name }} </b>
+                        <a style="margin-left: 5px;" href="/user/">  Profile Git </a>
+                        <a style="margin-left: 5px;">/</a>
+                        <a style="margin-left: 5px;" href="/logout/">Çıkış Yap </a>
                     {% else %}
                         <a href="/signup/">Üye Ol </a> yada <a href="/login/">Giriş Yap </a>
                     {% endif %}
-                </p>
+
+
+                </ul>
             </div>
             <div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated" data-wow-delay=".5s">
                 <ul>
@@ -22,6 +30,7 @@
                 </ul>
             </div>
             <div class="clearfix"></div>
+
         </div>
     </div>
     <div class="header-two navbar navbar-default"><!--header-two-->
