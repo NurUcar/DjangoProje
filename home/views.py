@@ -8,19 +8,27 @@ from django.shortcuts import render
 # Create your views here.
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactForm, ContactFormMessage, UserProfile
+from order.models import ShopCart
 from product.models import Product, Category, Images, Comment
 
 
 def index(request):
+    current_user = request.user
     setting = Setting.objects.get(pk=1)
     sliderdata = Product.objects.all()[:4]
     category = Category.objects.all()
     dayproducts = Product.objects.all()[:4]
     lastproducts = Product.objects.all().order_by('-id')[:4]
     randomproducts = Product.objects.all().order_by('?')[:4]
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
+    total = 0
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {'setting': setting,
                'category': category,
                'page': 'home',
+               'total': total,
                'sliderdata': sliderdata,
                'dayproducts': dayproducts,
                'lastproducts': lastproducts,

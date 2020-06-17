@@ -54,15 +54,10 @@
                         CONTACT US</a>
                 </div>
                 <div class="header-right cart">
-                    <a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                    <a href="/shopcart/"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
                     <h4><a href="/shopcart/">
-                        <span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity"
-                                                                             class="simpleCart_quantity"> 0 </span>)
+                        <span>Total: {{ total }}₺ </span> (<span> {{ request.session.cart_items }} </span>)
                     </a></h4>
-                    <div class="cart-box">
-                        <p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
-                        <div class="clearfix"></div>
-                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>

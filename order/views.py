@@ -35,6 +35,7 @@ def addtocart(request, id):
                 data.product_id = id
                 data.quantity = form.cleaned_data['quantity']
                 data.save()
+            request.session['cart_items']= ShopCart.objects.filter(user_id=current_user.id).count()
             messages.success(request, "Ürün başarı ile sepete eklenmiştir. Teşekkür Ederiz.")
             return HttpResponseRedirect(url)
 
@@ -49,6 +50,7 @@ def addtocart(request, id):
             data.product_id = id
             data.quantity = 1
             data.save()
+        request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
         messages.success(request, "Ürün başarı ile sepete eklenmiştir. Teşekkür Ederiz.")
         return HttpResponseRedirect(url)
     messages.warning(request, "Ürün sepete eklenemedi!. Lütfen kontrol ediniz..")
@@ -59,9 +61,10 @@ def addtocart(request, id):
 def shopcart(request):
     category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
-
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
+
     total = 0
     for rs in shop_cart:
         total += rs.product.price * rs.quantity
@@ -76,5 +79,7 @@ def shopcart(request):
 @login_required(login_url='/login')
 def deletefromcart(request, id):
     ShopCart.objects.filter(id=id).delete()
+    current_user=request.user
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
     messages.success(request, "Ürün başarılı bir şekilde sepetten kaldırılmıştır.")
     return HttpResponseRedirect("/shopcart")
