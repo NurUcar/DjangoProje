@@ -1,4 +1,5 @@
 {% load static %}
+
 <div class="header">
     <div class="top-header navbar navbar-default"><!--header-one-->
         <div class="container">
@@ -9,7 +10,7 @@
                         <img style="height: 50px;width: 50px;border: 0.5px solid gray;"
                              src="{{ request.user.profile.image.url }}">
                         <b style="margin-left: 5px;"> {{ user.first_name }} </b>
-                        <a style="margin-left: 5px;" href="/user/">  Profile Git </a>
+                        <a style="margin-left: 5px;" href="/user/"> Profile Git </a>
                         <a style="margin-left: 5px;">/</a>
                         <a style="margin-left: 5px;" href="/logout/">Çıkış Yap </a>
                     {% else %}
@@ -54,7 +55,7 @@
                 </div>
                 <div class="header-right cart">
                     <a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                    <h4><a href="checkout.html">
+                    <h4><a href="/shopcart/">
                         <span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity"
                                                                              class="simpleCart_quantity"> 0 </span>)
                     </a></h4>

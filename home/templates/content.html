@@ -1,10 +1,21 @@
 {% load static %}
 <!--GÜNÜNÜN ÜRÜNLERİ-->
+
 <div class="new">
     <div class="container">
+
         <div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
             <h3 class="title">Günün <span>Ürünleri</span></h3>
             <p>Bugüne Özel Ürünlerimiz</p>
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="alert alert-success {{ message.tags }}" role="alert">
+                        <strong>{{ message }}!</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
         </div>
         <div class="gallery-info">
 
@@ -12,12 +23,13 @@
 
                 <div class="col-md-3 new-grid simpleCart_shelfItem wow flipInY animated"
                      style="margin-left: 9px; margin-right: 9px" data-wow-delay=".5s">
+
                     <div class="new-top">
                         <a><img src="{{ rs.image.url }}" style="height: 333px;width: 250px" class="img-responsive"
                                 alt=""/></a>
                         <div class="new-text">
                             <ul>
-                                <li><a class="item_add" href="/addtocard/{{ rs.id }}"> Add to cart</a></li>
+                                <li><a class="item_add" href="/order/addtocart/{{ rs.id }}"> Add to cart</a></li>
                                 <li><a href="/product/{{ rs.id }}/{{ rs.slug }}">Quick View </a></li>
                                 {% for node in category %}
                                     {% if node.id == rs.category_id %}
@@ -61,6 +73,7 @@
         <div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
             <h3 class="title">Yeni<span> Eklenenler</span></h3>
             <p>Sitemize Yeni Eklenen Ürünler</p>
+
         </div>
         <div class="gallery-info">
             {% for rs in lastproducts %}
@@ -73,7 +86,7 @@
                         <p><span class="item_price">{{ rs.price }}₺</span></p>
 
                         <ul>
-                            <li><a class="item_add" href="/addtocard/{{ rs.id }}"><span
+                            <li><a class="item_add" href="/order/addtocart/{{ rs.id }}"><span
                                     class="glyphicon glyphicon glyphicon-shopping-cart"
                                     aria-hidden="true"></span></a></li>
                         </ul>
@@ -89,7 +102,9 @@
     <div class="container">
         <div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
             <h3 class="title">Popüler<span> Ürünler</span></h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
+
+            <p>Müsterilerimizin En Cok Tercih Ettigi Ürünler </p>
+
         </div>
         <div class="gallery-info">
             {% for rs in randomproducts %}
@@ -101,7 +116,7 @@
                         <p><span class="item_price">{{ rs.price }}₺</span></p>
 
                         <ul>
-                            <li><a class="item_add" href="/addtocard/{{ rs.id }}"><span
+                            <li><a class="item_add" href="/order/addtocart/{{ rs.id }}"><span
                                     class="glyphicon glyphicon glyphicon-shopping-cart"
                                     aria-hidden="true"></span></a></li>
                         </ul>

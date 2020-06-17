@@ -1,8 +1,8 @@
 {% extends "homebase.html" %}
 
-{% block title %}User Panel {{ profile.user_name }}{% endblock %}
-{% block keywords %}{{ setting.keywords }}{% endblock %}
-{% block description %}{{ setting.description }}{% endblock %}
+{% block title %} {{ categorydata.title }}{% endblock %}
+{% block keywords %}{{ categorydata.keywords }}{% endblock %}
+{% block description %}{{ categorydata.description }}{% endblock %}
 
 {% block head %}
     <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
@@ -16,7 +16,7 @@
             <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
                 <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a>
                 </li>
-                <li class="active">Kullanıcı Profili</li>
+                <li class="active">{{ categorydata.title }}</li>
             </ol>
         </div>
     </div>
@@ -26,13 +26,7 @@
                 <h3 class="title">Kullanıcı Paneli </h3>
             </div>
 
-        </div>
-    </div>
-    <!--user_panel-->
-    <div class="container">
-        <div class="address-row">
-
-            <div class="col-md-6 address-left wow fadeInLeft animated" data-wow-delay=".5s" style="margin-top: -100px;">
+             <div class="col-md-6 address-left wow fadeInLeft animated" data-wow-delay=".5s">
                 <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
                     <table class="table table-hover">
                         <thead>
@@ -48,13 +42,13 @@
                 </div>
 
             </div>
-            <div class="col-md-6 address-right" style="margin-top: -100px;">
+            <div class="col-md-6 address-right">
                 <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
                     <table class="table table-hover">
                         <thead>
                         <tr>
                             <th style="font-size: 20px;color: #F9522D;">Kullanıcı Bilgileri</th>
-                             <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -87,7 +81,9 @@
                 </div>
             </div>
 
+
         </div>
     </div>
+
 
 {% endblock %}

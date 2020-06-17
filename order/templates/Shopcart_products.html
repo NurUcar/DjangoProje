@@ -1,0 +1,76 @@
+{% extends "homebase.html" %}
+
+{% block title %}Alışveriş Sepetiniz{% endblock %}
+{% block keywords %}{{ product.keywords }}{% endblock %}
+{% block description %}{{ product.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a></li>
+                <li><a><span class="glyphicon " aria-hidden="true"></span>Sepet</a></li>
+            </ol>
+        </div>
+    </div>
+    <!--//breadcrumbs-->
+
+    <!--cart-items-->
+    <div class="cart-items">
+        <div class="container">
+            <h3 class="wow fadeInUp animated" data-wow-delay=".5s">Alıs Veris Sepeti</h3>
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="alert alert-success {{ message.tags }}" role="alert">
+                        <strong>{{ message }}!</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <!-- sepet ürünleri-->
+            {% for rs in shop_cart %}
+                <div class="cart-header wow fadeInUp animated" data-wow-delay=".5s">
+                    <!--Delete product from shopcart-->
+                    <a onclick="return confirm('You will delete the product! Are you sure?')" href="/order/deletefromcart/{{ rs.id }}">
+                        <div class="alert-close"></div>
+                    </a>
+                    <!--//Delete product from shopcart-->
+                    <div class="cart-sec simpleCart_shelfItem">
+                        <div class="cart-item cyc">
+                            <a><img src="{{ rs.product.image.url }}" class="img-responsive" alt=""></a>
+                        </div>
+                        <div class="cart-item-info">
+                            <h4><a href="single.html">{{ rs.product }}</a></h4>
+                            <ul class="qty">
+                                <li><p>Price: {{ rs.product.price }}₺</p></li>
+                                <li><p>Quantity: {{ rs.quantity }}</p></li>
+                            </ul>
+                            <br>
+                            <ul class="qty">
+                                <li><p>Amount: {{ rs.amount }}₺</p></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div style="font-style: italic;font-size: large;float: right;">
+
+                <b>Total: {{ total }}₺</b>
+
+            </div>
+
+            <!-- //sepet ürünleri-->
+        </div>
+    </div>
+    <!--//cart-items-->
+
+
+
+{% endblock %}

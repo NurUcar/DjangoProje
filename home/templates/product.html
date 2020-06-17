@@ -32,6 +32,14 @@
 
             <div class="col-md-9 product-model-sec">
                 <h4>{{ productCount }} tane ürün listelenmektedir.</h4><br>
+                {% if messages %}
+                    {% for message in messages %}
+
+                        <div class="alert alert-success {{ message.tags }}" role="alert">
+                            <strong>{{ message }}!</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 {% for rs in products %}
 
                     {% if rs.id|divisibleby:2 != True %}
@@ -42,8 +50,9 @@
                                 <div class="new-text">
                                     <ul>
                                         <li><a href="/product/{{ rs.id }}/{{ rs.slug }}">Quick View </a></li>
-                                        <li><input type="number" class="item_quantity" min="1" value="1"></li>
-                                        <li><a class="item_add" href=""> Add to cart</a></li>
+                                        <li><a class="item_add" href="/order/addtocart/{{ rs.id }}"> Add to cart</a>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -72,8 +81,8 @@
                                 <div class="new-text">
                                     <ul>
                                         <li><a href="/product/{{ rs.id }}/{{ rs.slug }}">Quick View </a></li>
-                                        <li><input type="number" class="item_quantity" min="1" value="1"></li>
-                                        <li><a class="item_add" href=""> Add to cart</a></li>
+                                        <li><a class="item_add" href="/order/addtocart/{{ rs.id }}"> Add to cart</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -100,26 +109,8 @@
             </div>
 
 
-            <div class="gallery-grid ">
-                <h6>YOU MAY ALSO LIKE</h6>
-                <a href="single.html"><img src="images/b1.png" class="img-responsive" alt=""/></a>
-                <div class="gallery-text simpleCart_shelfItem">
-                    <h5><a class="name" href="single.html">Full Sleeves Romper</a></h5>
-                    <p><span class="item_price">60$</span></p>
-                    <h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a
-                            href="#">xl</a></h4>
-                    <ul>
-                        <li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-                        <li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart"
-                                                               aria-hidden="true"></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty"
-                                              aria-hidden="true"></span></a></li>
-                    </ul>
-                </div>
-            </div>
+            <div class="clearfix"></div>
         </div>
-        <div class="clearfix"></div>
     </div>
-
     <!--//products-->
 {% endblock %}
