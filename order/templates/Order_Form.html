@@ -1,0 +1,128 @@
+{% extends "homebase.html" %}
+
+{% block title %}Alışveriş Sepetiniz{% endblock %}
+{% block keywords %}{{ product.keywords }}{% endblock %}
+{% block description %}{{ product.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a></li>
+                <li><a><span class="glyphicon " aria-hidden="true"></span>Sepet</a></li>
+            </ol>
+        </div>
+    </div>
+    <!--//breadcrumbs-->
+
+
+
+    <div class="contact">
+        <div class="container">
+
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="alert alert-success {{ message.tags }}" role="alert">
+                        <strong>{{ message }}!</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post">
+                <div class="col-md-6 address-right">
+                    <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th style="font-size: 20px;color: #F9522D;">Kargo Bilgileri</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="login-page" style="width: 500px; margin-top: -50px;">
+
+                            <div class="widget-shadow">
+
+                                <div class="login-body">
+
+                                    {% csrf_token %}
+                                    <p><label>First Name:</label></p>
+                                    <input type="text" name="first_name" value="{{ user.first_name }}" required="">
+                                    <p><label>Last Name:</label></p>
+                                    <input type="text" name="last_name" value="{{ user.last_name }}" required="">
+                                    <p><label>Address:</label></p>
+                                    <input type="text" name="address" value="{{ profile.address }}" required="">
+                                    <p><label>Phone:</label></p>
+                                    <input type="text" name="phone" value="{{ profile.phone }}" required="">
+                                    <p><label>City:</label></p>
+                                    <select name="city" style="width: 450px;height: 40px;">
+                                        <option value="{{ profile.city }} selected"> {{ profile.city }}</option>
+                                        <option value="Istanbul">Istanbul</option>
+                                        <option value="Izmir">Izmir</option>
+                                        <option value="Sakarya">Sakarya</option>
+                                        <option value="Kocaeli">Kocaeli</option>
+                                        <option value="Karabuk">Karabuk</option>
+
+                                    </select>
+                                    <br><br>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 address-right">
+                    <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th style="font-size: 20px;color: #F9522D;">Ödeme Bilgileri</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                        </table>
+                        <div class="login-page" style="width: 500px; margin-top: -50px">
+
+                            <div class="widget-shadow">
+
+                                <div class="login-body">
+                                    <p><label>Total:</label></p>
+                                    <input type="text" readonly value="{{ total }}₺" required="">
+                                    <p><label>Credit Card Holder:</label></p>
+                                    <input type="text" required="">
+                                    <p><label>Credit Card Number:</label></p>
+                                    <input type="text" required="">
+                                    <p><label>Credit Card Date/Year:</label></p>
+                                    <input type="text" placeholder="mm/yy" required="">
+                                    <p><label>Security Number:</label></p>
+                                    <input type="text" required="">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid_3 grid_5 wow fadeInDown animated" data-wow-delay=".5s"
+                     style="float: right; margin-top: -70px;margin-right: 20px;">
+                    <h3>
+                        <button class="label label-warning">Complete Order</button>
+                    </h3>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "homebase.html" %}
+
+{% block title %}Siparisiniz Tamamlanmıştır!.{% endblock %}
+{% block keywords %}{{ product.keywords }}{% endblock %}
+{% block description %}{{ product.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a></li>
+                <li><a><span class="glyphicon " aria-hidden="true"></span>Siparis Özeti</a></li>
+            </ol>
+        </div>
+    </div>
+    <!--//breadcrumbs-->
+    <div class="codes">
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="alert alert-success {{ message.tags }}" role="alert">
+                        <strong>{{ message }}!</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="grid_3 grid_5 wow fadeInDown animated" data-wow-delay=".5s">
+                <h3 class="hdg">Sevgili {{ user.first_name }}</h3>
+                <div class="well">
+                    Siparişiniz tamamlanmıştır.
+                </div>
+                <div class="well">
+                    Siparişiniz kodunuz : {{ ordercode }}
+                </div>
+                <div class="well">
+                    Iyı Alısverisler dileriz...
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

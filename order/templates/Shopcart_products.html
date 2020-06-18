@@ -37,7 +37,8 @@
             {% for rs in shop_cart %}
                 <div class="cart-header wow fadeInUp animated" data-wow-delay=".5s">
                     <!--Delete product from shopcart-->
-                    <a onclick="return confirm('You will delete the product! Are you sure?')" href="/order/deletefromcart/{{ rs.id }}">
+                    <a onclick="return confirm('You will delete the product! Are you sure?')"
+                       href="/order/deletefromcart/{{ rs.id }}">
                         <div class="alert-close"></div>
                     </a>
                     <!--//Delete product from shopcart-->
@@ -60,11 +61,30 @@
                     </div>
                 </div>
             {% endfor %}
-            <div style="font-style: italic;font-size: large;float: right;">
+            <div class="bs-docs-example wow fadeInDown animated"
+                 style="font-style: italic;font-size: large;float: right;" data-wow-delay=".5s">
+                <table class="table table-striped">
 
-                <b>Total: {{ total }}₺</b>
-
+                    <tbody>
+                    <tr>
+                        <td>ARA TOPLAM</td>
+                        <td>{{ total }}</td>
+                    </tr>
+                    <tr>
+                        <td>KARGO BEDELI</td>
+                        <td>Free</td>
+                    </tr>
+                    <tr>
+                        <td>TOPLAM</td>
+                        <td>{{ total }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                 <h2 style="float: right">
+                    <a href="/order/orderproduct"><span class="label label-warning">ONAYLA</span></a>
+                </h2>
             </div>
+
 
             <!-- //sepet ürünleri-->
         </div>
