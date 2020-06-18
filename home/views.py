@@ -39,8 +39,14 @@ def index(request):
 def aboutus(request):
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
+    total = 0
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {'setting': setting,
                'page': 'aboutus',
+               'total': total,
                'category': category, }
     return render(request, 'aboutus.html', context)
 
@@ -48,8 +54,14 @@ def aboutus(request):
 def references(request):
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {'setting': setting,
                'page': 'references',
+               'total': total,
                'category': category, }
     return render(request, 'references.html', context)
 
@@ -71,10 +83,16 @@ def contact(request):
 
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     form = ContactForm()
     context = {'setting': setting,
                'form': form,
-               'category': category, }
+               'category': category,
+               'total': total, }
     return render(request, 'contact.html', context)
 
 
@@ -84,10 +102,16 @@ def category_products(request, id, slug):
     productCount = Product.objects.filter(category_id=id).count()
     products = Product.objects.filter(category_id=id)
     setting = Setting.objects.get(pk=1)
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {'products': products,
                'category': category,
                'categorydata': categorydata,
                'productCount': productCount,
+               'total': total,
                'setting': setting,
                }
     return render(request, 'product.html', context)
@@ -99,10 +123,16 @@ def product_detail(request, id, slug):
     setting = Setting.objects.get(pk=1)
     images = Images.objects.filter(product_id=id)
     comments = Comment.objects.filter(product_id=id, status='True')
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {'category': category,
                'product': product,
                'setting': setting,
                'images': images,
+               'total':total,
                'comments': comments, }
     return render(request, 'product_detail.html', context)
 
@@ -112,10 +142,16 @@ def product_comment(request, id, slug):
     product = Product.objects.get(pk=id)
     setting = Setting.objects.get(pk=1)
     images = Images.objects.filter(product_id=id)
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {'category': category,
                'product': product,
                'setting': setting,
                'images': images,
+               'total':total,
                }
     return render(request, 'product_comment.html', context)
 
