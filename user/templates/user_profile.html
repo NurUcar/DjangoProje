@@ -26,7 +26,7 @@
                 <h3 class="title">Kullanıcı Paneli </h3>
             </div>
 
-             <div class="col-md-6 address-left wow fadeInLeft animated" data-wow-delay=".5s">
+            <div class="col-md-6 address-left wow fadeInLeft animated" data-wow-delay=".5s">
                 <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
                     <table class="table table-hover">
                         <thead>
@@ -53,7 +53,14 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th></th>
+                            <th>
+                                <div class="grid_3 grid_5 wow fadeInDown animated" data-wow-delay=".5s">
+                                    <h3><a href="/user/update"><span
+                                            class="label label-warning" >Update Profile</span></a></h3>
+                                    <h3><a href="/user/password"><span
+                                            class="label label-warning">Change Password</span></a></h3>
+                                </div>
+                            </th>
                             <td><img style="width: 200px;height: 250px;" src="{{ profile.image.url }}" alt=""></td>
                         </tr>
                         <tr>
