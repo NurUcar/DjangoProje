@@ -8,7 +8,7 @@
                 <ul>
                     {% if user.id is not None %}
                         <img style="height: 50px;width: 50px;border: 0.5px solid gray;"
-                             src="{{ request.user.profile.image.url }}">
+                             src="{{ user.userprofile.image.url }}">
                         <b style="margin-left: 5px;"> {{ user.first_name }} </b>
                         <a style="margin-left: 5px;" href="/user/"> Profile Git </a>
                         <a style="margin-left: 5px;">/</a>

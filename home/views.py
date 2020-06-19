@@ -132,7 +132,7 @@ def product_detail(request, id, slug):
                'product': product,
                'setting': setting,
                'images': images,
-               'total':total,
+               'total': total,
                'comments': comments, }
     return render(request, 'product_detail.html', context)
 
@@ -151,7 +151,7 @@ def product_comment(request, id, slug):
                'product': product,
                'setting': setting,
                'images': images,
-               'total':total,
+               'total': total,
                }
     return render(request, 'product_comment.html', context)
 
@@ -237,6 +237,6 @@ def signup_view(request):
     context = {
         'category': category,
         'setting': setting,
-        'form': form
+        'form': form,
     }
     return render(request, 'signup.html', context)

@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 # Create your views here.
 from home.models import Setting, UserProfile
-from order.models import Order, OrderProduct
+from order.models import Order, OrderProduct, ShopCart
 from product.models import Category, Comment
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
@@ -17,9 +17,14 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     current_user = request.user
     profile = UserProfile.objects.get(user_id=current_user.id)
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {
         'category': category,
         'setting': setting,
+        'total': total,
         'profile': profile,
     }
     return render(request, "user_profile.html", context)
