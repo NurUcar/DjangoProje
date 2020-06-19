@@ -1,0 +1,129 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ profile.user_name }} Siparis Detayı{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a>
+                </li>
+                <li class="active">Siparis Detayı</li>
+
+            </ol>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="container">
+
+            <div class="col-md-6 address-left wow fadeInLeft animated" data-wow-delay=".5s">
+                <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="font-size: 20px;color: #F9522D;">Kullanıcı Bilgileri</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="address-grid" style="height: 500px;">
+                    {% include "user_panel.html" %}
+                </div>
+
+            </div>
+            <div class="col-md-6 address-right">
+                <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="font-size: 20px;color: #F9522D;">Siparis Ürün Listesi</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                        {% for rs in orderitems %}
+                            <tr>
+
+                                <td><img src="{{ rs.product.image.url }}" style="width: 50px;height: 50px;"></td>
+                                <td><a style="color: black;"
+                                       href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">{{ rs.product.title }}</a>
+                                </td>
+                                <td>{{ rs.price }}</td>
+                                <td>{{ rs.quantity }}</td>
+                                <td>{{ rs.amount }}</td>
+                                <td>{{ rs.status }}</td>
+                                <td>{{ rs.created_at }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="font-size: 20px;color: black;">Siparis Kargo Bilgileri</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <th>Name Surname:</th>
+
+                            <td >{{order.first_name}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Phone:</th>
+                            <td>{{ order.phone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Address:</th>
+                            <td>{{ order.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>City:</th>
+                            <td>{{ order.city }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>{{ order.status }}</td>
+                        </tr>
+                        <tr>
+                            <th>Olusturulma Tarihi:</th>
+                            <td>{{ order.created_at }}</td>
+                        </tr>
+                        <tr>
+                            <th>Kargo Bilgisi:</th>
+                            <td>{{ order.adminnote }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

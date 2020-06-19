@@ -1,8 +1,9 @@
 {% extends "homebase.html" %}
 
-{% block title %} {{ categorydata.title }}{% endblock %}
-{% block keywords %}{{ categorydata.keywords }}{% endblock %}
-{% block description %}{{ categorydata.description }}{% endblock %}
+
+{% block title %} {{ profile.user_name }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
 
 {% block head %}
     <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
@@ -16,7 +17,7 @@
             <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
                 <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a>
                 </li>
-                <li class="active">{{ categorydata.title }}</li>
+                <li class="active">Kullanıcı Paneli</li>
             </ol>
         </div>
     </div>
@@ -47,7 +48,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th style="font-size: 20px;color: #F9522D;">Kullanıcı Bilgileri</th>
+                            <th style="font-size: 20px;color: black;">Kullanıcı Bilgileri</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -85,6 +86,7 @@
                         </tr>
                         </tbody>
                     </table>
+
                 </div>
             </div>
 

@@ -1,14 +1,17 @@
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 # Create your views here.
 from home.models import Setting, UserProfile
+from order.models import Order, OrderProduct
 from product.models import Category
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
 
+@login_required(login_url='/login')
 def index(request):
     category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
@@ -22,6 +25,7 @@ def index(request):
     return render(request, "user_profile.html", context)
 
 
+@login_required(login_url='/login')
 def user_update(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -43,6 +47,7 @@ def user_update(request):
         return render(request, 'user_update.html', context)
 
 
+@login_required(login_url='/login')
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -58,3 +63,33 @@ def change_password(request):
         category = Category.objects.all()
         form = PasswordChangeForm(request.user)
         return render(request, 'change_password.html', {'form': form, 'category': category})
+
+
+@login_required(login_url='/login')
+def orders(request):
+    category = Category.objects.all()
+    current_user = request.user
+    orders = Order.objects.filter(user_id=current_user.id)
+    setting = Setting.objects.get(pk=1)
+    context = {
+        'category': category,
+        'orders': orders,
+        'setting': setting,
+    }
+    return render(request, 'user_orders.html', context)
+
+
+@login_required(login_url='/login')
+def orderdetail(request, id):
+    category = Category.objects.all()
+    current_user = request.user
+    order = Order.objects.get(user_id=current_user.id, id=id)
+    orderitems = OrderProduct.objects.filter(order_id=id)
+    setting = Setting.objects.get(pk=1)
+    context = {
+        'category': category,
+        'order': order,
+        'orderitems': orderitems,
+        'setting': setting,
+    }
+    return render(request, 'user_order_detail.html', context)
