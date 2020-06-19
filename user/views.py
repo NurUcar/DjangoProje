@@ -44,10 +44,15 @@ def user_update(request):
         category = Category.objects.all()
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.userprofile)
+        shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+        total = 0
+        for rs in shop_cart:
+            total += rs.product.price * rs.quantity
         context = {
             'category': category,
             'user_form': user_form,
-            'profile_form': profile_form
+            'profile_form': profile_form,
+            'total': total
         }
         return render(request, 'user_update.html', context)
 
@@ -76,10 +81,15 @@ def orders(request):
     current_user = request.user
     orders = Order.objects.filter(user_id=current_user.id)
     setting = Setting.objects.get(pk=1)
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {
         'category': category,
         'orders': orders,
         'setting': setting,
+        'total': total
     }
     return render(request, 'user_orders.html', context)
 
@@ -91,11 +101,16 @@ def orderdetail(request, id):
     order = Order.objects.get(user_id=current_user.id, id=id)
     orderitems = OrderProduct.objects.filter(order_id=id)
     setting = Setting.objects.get(pk=1)
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {
         'category': category,
         'order': order,
         'orderitems': orderitems,
         'setting': setting,
+        'total': total
     }
     return render(request, 'user_order_detail.html', context)
 
@@ -106,11 +121,17 @@ def comments(request):
     current_user = request.user
     comments = Comment.objects.filter(user_id=current_user.id)
     setting = Setting.objects.get(pk=1)
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
     context = {
         'category': category,
         'comments': comments,
         'setting': setting,
+        'total': total
     }
+
     return render(request, 'user_comments.html', context)
 
 
