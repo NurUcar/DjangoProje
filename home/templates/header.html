@@ -128,7 +128,6 @@
                                             </ul>
 
                                         </div>
-
                                         <div class="clearfix"></div>
 
                                     {% endrecursetree %}
@@ -140,14 +139,42 @@
                         <li><a href="/references">Referanslarımız</a></li>
                         <li><a href="/aboutus">Hakkımızda</a></li>
                         <li><a href="/contact">İletişim</a></li>
-                    </ul>
-                    <div class="clearfix"></div>
-                    <!--//navbar-collapse-->
-                    <header class="cd-main-header">
-                        <ul class="cd-header-buttons">
-                            <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
-                        </ul> <!-- cd-header-buttons -->
-                    </header>
+                        <li class="dropdown grid">
+                            {% if menu %}
+                                {% recursetree menu %}
+
+                                    <a href="/menu/{{ node.id }}" class="dropdown-toggle list1"
+                                            {% if not node.is_leaf_node %}
+                                       data-toggle="dropdown" {% endif %}>{{ node.title }}<b
+                                            class="caret"></b></a>
+
+
+
+                                    <ul class="dropdown-menu multi-column multi-column2 ">
+                                        {% if not node.is_leaf_node %}
+                                            <li>
+                                                <a class="list"
+                                                   href="#">{{ children }}</a>
+
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+
+
+
+                                    <div class="clearfix"></div>
+
+                                {% endrecursetree %}
+                            {% endif %}
+                        </li>
+
+                        <div class="clearfix"></div>
+                        <!--//navbar-collapse-->
+                        <header class="cd-main-header">
+                            <ul class="cd-header-buttons">
+                                <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+                            </ul> <!-- cd-header-buttons -->
+                        </header>
                 </div>
                 <!--//navbar-header-->
             </nav>

@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from content.models import Content, Menu, CImages
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactForm, ContactFormMessage, UserProfile
 from order.models import ShopCart
@@ -20,6 +21,7 @@ def index(request):
     dayproducts = Product.objects.all()[:4]
     lastproducts = Product.objects.all().order_by('-id')[:4]
     randomproducts = Product.objects.all().order_by('?')[:4]
+    menu = Menu.objects.all()
     request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
     total = 0
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
@@ -32,7 +34,8 @@ def index(request):
                'sliderdata': sliderdata,
                'dayproducts': dayproducts,
                'lastproducts': lastproducts,
-               'randomproducts': randomproducts, }
+               'randomproducts': randomproducts,
+               'menu': menu}
     return render(request, 'index.html', context)
 
 
@@ -240,3 +243,36 @@ def signup_view(request):
         'form': form,
     }
     return render(request, 'signup.html', context)
+
+
+def menu(request, id):
+    content = Content.objects.get(menu_id=id)
+    if content:
+        link = '/content/' + str(content.id) + '/menu'
+        return HttpResponseRedirect(link)
+    else:
+        messages.warning(request, "Ilgili içerik bulunamadı..")
+        link = '/'
+        return HttpResponseRedirect(link)
+
+
+def contentdetail(request, id, slug):
+    category = Category.objects.all()
+    menu = Menu.objects.all()
+    setting = Setting.objects.get(pk=1)
+    content = Content.objects.get(pk=id)
+    images = CImages.objects.filter(content_id=id)
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    total = 0
+    for rs in shop_cart:
+        total += rs.product.price * rs.quantity
+    context = {
+        'content': content,
+        'category': category,
+        'menu': menu,
+        'images': images,
+        'setting': setting,
+        'total': total
+    }
+    return render(request, 'content_detail.html', context)

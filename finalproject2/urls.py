@@ -27,9 +27,9 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('user/', include('user.urls')),
     path('order/', include('order.urls')),
+    path('content/', include('content.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
-
 
     path('aboutus/', views.aboutus, name='aboutus'),
     path('references/', views.references, name='references'),
@@ -37,6 +37,8 @@ urlpatterns = [
     path('category/<int:id>/<slug:slug>/', views.category_products, name='category_products'),
     path('product/<int:id>/<slug:slug>/', views.product_detail, name='product_detail'),
     path('product/<int:id>/<slug:slug>/product_comment', views.product_comment, name='product_comment'),
+    path('content/<int:id>/<slug:slug>/', views.contentdetail, name='contentdetail'),
+    path('menu/<int:id>/', views.menu, name='menu'),
     path('search/', views.product_search, name='product_search'),
     path('search_auto/', views.product_search_auto, name='product_search_auto'),
     path('logout/', views.logout_view, name='logout_view'),
