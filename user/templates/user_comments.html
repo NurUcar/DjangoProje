@@ -1,0 +1,94 @@
+{% extends "homebase.html" %}
+
+{% block title %} Kullanıcı Yorumları{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Anasayfa</a>
+                </li>
+                <li class="active">Siparis Listesi</li>
+            </ol>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="alert alert-success {{ message.tags }}" role="alert">
+                        <strong>{{ message }}!</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="col-md-6 address-left wow fadeInLeft animated" data-wow-delay=".5s">
+                <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="font-size: 20px;color: #F9522D;">Siparis Listesi</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="address-grid" style="height: 500px;">
+                    {% include "user_panel.html" %}
+                </div>
+
+            </div>
+            <div class="col-md-6 address-right">
+                <div class="bs-docs-example wow fadeInDown animated" data-wow-delay=".5s">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="font-size: 20px;color: #F9522D;">Siparislerim</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>Product</th>
+                            <th>Rate</th>
+                            <th>Subject</th>
+                            <th>Comment</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Detail</th>
+                        </tr>
+                        {% for rs in comments %}
+                            <tr>
+                                <td><a style="color: black;"
+                                       href="/product/{{ rs.product.id }}/{{ rs.product.slug }}"><strong>{{ rs.product.title }}</strong></a>
+                                </td>
+                                <td>{{ rs.subject }}</td>
+                                <td>{{ rs.rate }}</td>
+                                <td>{{ rs.comment }}</td>
+                                <td>{{ rs.status }}</td>
+                                <td>{{ rs.created_at }}</td>
+                                <td><a href="/user/deletecomment/{{ rs.id }}"
+                                       onclick="return confirm('You will delete the product! Are you sure?')"><span
+                                        class="label-warning label">Delete</span></a></td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}
